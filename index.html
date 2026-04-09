@@ -127,7 +127,34 @@
     <button onclick="showBookingForm()" style="padding:10px 20px; font-size:16px; cursor:pointer;">Book Table</button>
     
     <!-- Booking Form (hidden by default) -->
-    <div id="bookingForm" style="display:none; margin-top:20px;">
+    <form action="/saveBooking" method="POST" id="bookingForm" style="background:#ffe5b4; padding:20px; border-radius:10px; max-width:300px; margin-top:20px;">
+    <h3>Table Reservation</h3>
+
+    <label>Name:</label>
+    <input type="text" name="name" placeholder="Your Name" required>
+
+    <label>Phone:</label>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+
+    <label>Number of Guests:</label>
+    <input type="number" name="guests" placeholder="Guests" min="1" required>
+
+    <label>Date:</label>
+    <input type="date" name="date" required>
+
+    <label>Time:</label>
+    <input type="time" name="time" required>
+
+    <label>Table Size:</label>
+    <select name="tableSize" required>
+        <option value="">Select Table Size</option>
+        <option value="2">2-seater</option>
+        <option value="4">4-seater</option>
+        <option value="6">6-seater</option>
+    </select>
+
+    <button type="submit" style="margin-top:10px; background:#d62828; color:white; padding:10px; border:none; border-radius:5px; cursor:pointer;">Book Table</button>
+</form>
         <h3>Table Reservation</h3>
         
         <label>Name:</label><br>
