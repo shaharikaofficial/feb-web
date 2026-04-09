@@ -49,20 +49,18 @@
             text-align: center;
             padding: 10px;
         }
-        form {
-            background: #ffe5b4;
-            padding: 15px;
-            border-radius: 10px;
-            width: 250px;
-        }
         input, select {
             width: 100%;
             padding: 8px;
             margin: 5px 0;
         }
+        form {
+            background: #ffe5b4;
+            padding: 15px;
+            border-radius: 10px;
+        }
     </style>
 </head>
-
 <body>
 
 <header>
@@ -84,22 +82,18 @@
 
 <section>
     <h2>Our Menu</h2>
-
     <div class="menu-item">
         <h3>🍕 Pizza</h3>
         <p>Cheesy and tasty - ₹200</p>
     </div>
-
     <div class="menu-item">
         <h3>🍔 Burger</h3>
         <p>Juicy and spicy - ₹150</p>
     </div>
-
     <div class="menu-item">
         <h3>🥤 Juice</h3>
         <p>Fresh and healthy - ₹80</p>
     </div>
-
 </section>
 
 <section>
@@ -110,7 +104,6 @@
 
 <section id="reserve">
     <h2>Table Reservation</h2>
-
     <form onsubmit="reserveTable(event)">
         <input type="text" placeholder="Your Name" required>
         <input type="number" placeholder="Number of People" required>
@@ -123,11 +116,9 @@
 <!-- Book Table Section -->
 <section id="bookTableSection" style="margin-top:30px; padding:15px; border:1px solid #ccc; border-radius:10px; background:#fff8f0;">
     <h2>Book Your Table</h2>
-    
-    <!-- Book Table Button -->
     <button onclick="showBookingForm()" style="padding:10px 20px; font-size:16px; cursor:pointer;">Book Table</button>
-    
-    <!-- Only one Booking Form -->
+
+    <!-- Only ONE form -->
     <form action="/saveBooking" method="POST" id="bookingForm" style="display:none; background:#ffe5b4; padding:20px; border-radius:10px; max-width:300px; margin-top:20px;">
         <h3>Table Reservation</h3>
 
@@ -180,4 +171,3 @@ function showBookingForm() {
 
 </body>
 </html>
-       
