@@ -60,6 +60,10 @@
             border-radius: 10px;
             max-width: 300px;
         }
+        #bookingForm {
+            display: none; /* hidden initially */
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -67,7 +71,6 @@
 <header>
     <h1>🍴 Spicy Bites</h1>
     <p>Delicious Food, Happy Mood!</p>
-    <button onclick="goToReserve()">Reserve Table</button>
 </header>
 
 <nav>
@@ -103,13 +106,36 @@
     <p>📞 9066940210</p>
 </section>
 
-<section id="reserve">
-    <h2>Table Reservation</h2>
-    <form onsubmit="alert('Table Reserved Successfully!'); return false;">
+<!-- Book Table Section -->
+<section id="bookTableSection">
+    <h2>Book Your Table</h2>
+    <button onclick="showBookingForm()">Book Table</button>
+
+    <form id="bookingForm" onsubmit="alert('Table Reserved Successfully!'); return false;">
+        <h3>Table Reservation</h3>
+        <label>Name:</label>
         <input type="text" placeholder="Your Name" required>
-        <input type="number" placeholder="Number of People" required>
+
+        <label>Phone:</label>
+        <input type="tel" placeholder="Phone Number" required>
+
+        <label>Number of Guests:</label>
+        <input type="number" placeholder="Guests" min="1" required>
+
+        <label>Date:</label>
         <input type="date" required>
+
+        <label>Time:</label>
         <input type="time" required>
+
+        <label>Table Size:</label>
+        <select required>
+            <option value="">Select Table Size</option>
+            <option value="2">2-seater</option>
+            <option value="4">4-seater</option>
+            <option value="6">6-seater</option>
+        </select>
+
         <button type="submit">Book Table</button>
     </form>
 </section>
@@ -119,8 +145,14 @@
 </footer>
 
 <script>
-function goToReserve() {
-    document.getElementById("reserve").scrollIntoView({behavior: "smooth"});
+function showBookingForm() {
+    const form = document.getElementById("bookingForm");
+    if(form.style.display === "none") {
+        form.style.display = "block";
+        form.scrollIntoView({behavior: "smooth"});
+    } else {
+        form.style.display = "none";
+    }
 }
 </script>
 
