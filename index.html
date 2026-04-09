@@ -34,11 +34,31 @@
             padding: 10px;
             border-radius: 10px;
         }
+        button {
+            background-color: white;
+            color: #d62828;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
         footer {
             background-color: #003049;
             color: white;
             text-align: center;
             padding: 10px;
+        }
+        form {
+            background: #ffe5b4;
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -48,6 +68,7 @@
 <header>
     <h1>🍴 Spicy Bites</h1>
     <p>Delicious Food, Happy Mood!</p>
+    <button onclick="goToReserve()">Reserve Table</button>
 </header>
 
 <nav>
@@ -87,9 +108,33 @@
     <p>📞 9876543210</p>
 </section>
 
+<section id="reserve">
+    <h2>Table Reservation</h2>
+
+    <form onsubmit="reserveTable(event)">
+        <input type="text" placeholder="Your Name" required>
+        <input type="number" placeholder="Number of People" required>
+        <input type="date" required>
+        <input type="time" required>
+        <button type="submit">Book Table</button>
+    </form>
+</section>
+
 <footer>
     <p>© 2026 Spicy Bites Restaurant</p>
 </footer>
 
+<script>
+function reserveTable(event) {
+    event.preventDefault();
+    alert("Table Reserved Successfully!");
+}
+
+function goToReserve() {
+    document.getElementById("reserve").scrollIntoView({behavior: "smooth"});
+}
+</script>
+
 </body>
 </html>
+       
