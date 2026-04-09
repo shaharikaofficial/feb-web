@@ -58,6 +58,7 @@
             background: #ffe5b4;
             padding: 15px;
             border-radius: 10px;
+            max-width: 300px;
         }
     </style>
 </head>
@@ -104,7 +105,7 @@
 
 <section id="reserve">
     <h2>Table Reservation</h2>
-    <form onsubmit="reserveTable(event)">
+    <form onsubmit="alert('Table Reserved Successfully!'); return false;">
         <input type="text" placeholder="Your Name" required>
         <input type="number" placeholder="Number of People" required>
         <input type="date" required>
@@ -113,59 +114,13 @@
     </form>
 </section>
 
-<!-- Book Table Section -->
-<section id="bookTableSection" style="margin-top:30px; padding:15px; border:1px solid #ccc; border-radius:10px; background:#fff8f0;">
-    <h2>Book Your Table</h2>
-    <button onclick="showBookingForm()" style="padding:10px 20px; font-size:16px; cursor:pointer;">Book Table</button>
-
-    <!-- Only ONE form -->
-    <form action="/saveBooking" method="POST" id="bookingForm" style="display:none; background:#ffe5b4; padding:20px; border-radius:10px; max-width:300px; margin-top:20px;">
-        <h3>Table Reservation</h3>
-
-        <label>Name:</label>
-        <input type="text" name="name" placeholder="Your Name" required>
-
-        <label>Phone:</label>
-        <input type="tel" name="phone" placeholder="Phone Number" required>
-
-        <label>Number of Guests:</label>
-        <input type="number" name="guests" placeholder="Guests" min="1" required>
-
-        <label>Date:</label>
-        <input type="date" name="date" required>
-
-        <label>Time:</label>
-        <input type="time" name="time" required>
-
-        <label>Table Size:</label>
-        <select name="tableSize" required>
-            <option value="">Select Table Size</option>
-            <option value="2">2-seater</option>
-            <option value="4">4-seater</option>
-            <option value="6">6-seater</option>
-        </select>
-
-        <button type="submit" style="margin-top:10px; background:#d62828; color:white; padding:10px; border:none; border-radius:5px; cursor:pointer;">Book Table</button>
-    </form>
-</section>
-
 <footer>
     <p>© 2026 Spicy Bites Restaurant</p>
 </footer>
 
 <script>
-function reserveTable(event) {
-    event.preventDefault();
-    alert("Table Reserved Successfully!");
-}
-
 function goToReserve() {
     document.getElementById("reserve").scrollIntoView({behavior: "smooth"});
-}
-
-function showBookingForm() {
-    const form = document.getElementById("bookingForm");
-    form.style.display = form.style.display === "none" ? "block" : "none";
 }
 </script>
 
