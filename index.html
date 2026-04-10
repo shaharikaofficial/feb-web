@@ -6,21 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        html, body {
+        * {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
+            box-sizing: border-box;
             font-family: Arial;
         }
 
         body {
-            background: linear-gradient(135deg, #fff8f0, #ffe0b2);
-            display: flex;
-            justify-content: center;
+            background: #fff;
         }
 
-        /* LANDING PAGE */
+        /* FULL SCREEN LOCK SCREEN */
         #landing {
             height: 100vh;
             width: 100vw;
@@ -28,13 +25,17 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
             color: white;
             text-align: center;
         }
 
         #landing h1 {
-            font-size: 40px;
+            font-size: 42px;
+        }
+
+        #landing p {
+            margin: 10px 0 20px;
         }
 
         #landing button {
@@ -43,67 +44,34 @@
             border-radius: 25px;
             font-size: 18px;
             cursor: pointer;
-        }
-
-        /* MAIN SITE */
-        #mainSite {
-            width: 100%;
-            max-width: 1200px;
-            display: none;
-        }
-
-        header {
-            background: linear-gradient(90deg, #ff416c, #ff4b2b);
-            color: white;
-            text-align: center;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        nav {
-            background: #ff9800;
-            display: flex;
-            justify-content: center;
-            padding: 12px;
-        }
-
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
+            background: white;
+            color: #ff416c;
             font-weight: bold;
         }
 
-        nav a:hover {
-            color: black;
+        /* MAIN PAGE (hidden first) */
+        #main {
+            display: none;
+            padding: 15px;
         }
 
-        section {
-            padding: 25px;
-        }
-
-        h2 {
-            color: #d62828;
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #ff416c;
+            color: white;
+            border-radius: 10px;
         }
 
         .menu {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
+            margin-top: 20px;
         }
 
-        .menu-item {
-            background: white;
+        .item {
+            background: #f5f5f5;
             padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .menu-item:hover {
-            transform: scale(1.05);
-            transition: 0.3s;
-            background: #fff3e0;
+            margin: 10px 0;
+            border-radius: 10px;
         }
 
         button {
@@ -111,198 +79,146 @@
             color: white;
             border: none;
             padding: 10px 15px;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
         }
 
         form {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 320px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             display: none;
+            margin-top: 15px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         input, select {
             width: 100%;
             padding: 10px;
             margin: 6px 0;
-            border-radius: 8px;
-            border: 1px solid #ddd;
         }
 
         table {
             width: 100%;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            margin-top: 15px;
+            border-collapse: collapse;
         }
 
         th {
             background: #ff416c;
             color: white;
-            padding: 10px;
+            padding: 8px;
         }
 
         td {
-            padding: 10px;
+            padding: 8px;
             text-align: center;
-        }
-
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-        }
-
-        .qr {
-            margin-top: 10px;
-            border: 3px solid #ff416c;
-            border-radius: 10px;
         }
     </style>
 </head>
 
 <body>
 
-<!-- LANDING PAGE -->
+<!-- LANDING SCREEN -->
 <div id="landing">
     <h1>🍽️ Spicy Bites</h1>
-    <p>Delicious Food • Happy Mood • Fresh Taste</p>
-    <button onclick="enterSite()">Enter Restaurant</button>
+    <p>Delicious Food • Fresh Taste</p>
+    <button onclick="enterSite()">Enter</button>
 </div>
 
-<!-- MAIN WEBSITE -->
-<div id="mainSite">
+<!-- MAIN SITE -->
+<div id="main">
 
 <header>
-    <h1>🍽️ Spicy Bites</h1>
-    <p>Delicious Food • Happy Mood • Fresh Taste</p>
+    <h2>🍽️ Spicy Bites Menu</h2>
 </header>
 
-<nav>
-    <a href="#">Home</a>
-    <a href="#">Menu</a>
-    <a href="#">Book</a>
-    <a href="#">Contact</a>
-</nav>
+<div class="menu">
+    <div class="item">🍕 Pizza - ₹200</div>
+    <div class="item">🍔 Burger - ₹150</div>
+    <div class="item">🥤 Juice - ₹80</div>
+</div>
 
-<section>
-    <h2>🔥 Our Menu</h2>
+<button onclick="toggleForm()">Book Table</button>
 
-    <div class="menu">
-        <div class="menu-item">🍕 Pizza<br>₹200</div>
-        <div class="menu-item">🍔 Burger<br>₹150</div>
-        <div class="menu-item">🥤 Juice<br>₹80</div>
-        <div class="menu-item">🍝 Pasta<br>₹180</div>
-    </div>
-</section>
+<form id="form" onsubmit="saveBooking(event)">
+    <input id="name" placeholder="Name" required>
+    <input id="phone" placeholder="Phone" required>
+    <input id="guests" type="number" placeholder="Guests" required>
+    <input id="date" type="date" required>
+    <input id="time" type="time" required>
 
-<section>
-    <h2>📅 Book Table</h2>
+    <select id="table" required>
+        <option value="">Table Size</option>
+        <option>2</option>
+        <option>4</option>
+        <option>6</option>
+    </select>
 
-    <button onclick="toggleForm()">Open Booking</button>
+    <button type="submit">Confirm</button>
+</form>
 
-    <form id="bookingForm" onsubmit="saveBooking(event)">
-        <input id="name" placeholder="Name" required>
-        <input id="phone" placeholder="Phone" required>
-        <input id="guests" type="number" placeholder="Guests" required>
-        <input id="date" type="date" required>
-        <input id="time" type="time" required>
+<button onclick="showAdmin()">Admin View</button>
 
-        <select id="table" required>
-            <option value="">Table Size</option>
-            <option>2</option>
-            <option>4</option>
-            <option>6</option>
-        </select>
+<h3 id="count"></h3>
 
-        <h3>💳 Scan & Pay</h3>
-
-        <img class="qr"
-        src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=yourupiid@okaxis&pn=SpicyBites&am=100&cu=INR">
-
-        <button type="submit">Confirm Booking</button>
-    </form>
-</section>
-
-<section>
-    <h2>📊 Admin Panel</h2>
-
-    <button onclick="showAdmin()">Admin View</button>
-
-    <h3 id="count"></h3>
-
-    <div id="adminSection" style="display:none;">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Guests</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Table</th>
-                </tr>
-            </thead>
-            <tbody id="adminTable"></tbody>
-        </table>
-    </div>
-</section>
-
-<footer>
-    © 2026 Spicy Bites | Made with ❤️
-</footer>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Guests</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Table</th>
+        </tr>
+    </thead>
+    <tbody id="tableData"></tbody>
+</table>
 
 </div>
 
 <script>
 function enterSite() {
     document.getElementById("landing").style.display = "none";
-    document.getElementById("mainSite").style.display = "block";
+    document.getElementById("main").style.display = "block";
 }
 
 function toggleForm() {
-    let form = document.getElementById("bookingForm");
-    form.style.display = (form.style.display === "block") ? "none" : "block";
+    let f = document.getElementById("form");
+    f.style.display = (f.style.display === "block") ? "none" : "block";
 }
 
 function saveBooking(e) {
     e.preventDefault();
 
-    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    let data = JSON.parse(localStorage.getItem("bookings")) || [];
 
-    bookings.push({
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        guests: document.getElementById("guests").value,
-        date: document.getElementById("date").value,
-        time: document.getElementById("time").value,
-        table: document.getElementById("table").value
+    data.push({
+        name: name.value,
+        phone: phone.value,
+        guests: guests.value,
+        date: date.value,
+        time: time.value,
+        table: table.value
     });
 
-    localStorage.setItem("bookings", JSON.stringify(bookings));
+    localStorage.setItem("bookings", JSON.stringify(data));
 
-    alert("Booking Confirmed!");
-    document.getElementById("bookingForm").reset();
+    alert("Booked Successfully!");
+    form.reset();
 }
 
 function showAdmin() {
-    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-
-    document.getElementById("adminSection").style.display = "block";
+    let data = JSON.parse(localStorage.getItem("bookings")) || [];
 
     document.getElementById("count").innerText =
-        "Total Bookings: " + bookings.length;
+        "Total Bookings: " + data.length;
 
-    let table = document.getElementById("adminTable");
+    let table = document.getElementById("tableData");
     table.innerHTML = "";
 
-    bookings.forEach(b => {
+    data.forEach(b => {
         table.innerHTML += `
         <tr>
             <td>${b.name}</td>
