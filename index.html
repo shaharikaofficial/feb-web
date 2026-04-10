@@ -8,64 +8,70 @@
             margin: 0;
             background-color: #fff8f0;
         }
+
         header {
-            background-color: #d62828;
+            background: #d62828;
             color: white;
-            padding: 20px;
             text-align: center;
+            padding: 20px;
         }
+
         nav {
-            background-color: #f77f00;
+            background: #f77f00;
             padding: 10px;
             text-align: center;
         }
+
         nav a {
             color: white;
             margin: 15px;
             text-decoration: none;
             font-weight: bold;
         }
+
         section {
             padding: 20px;
         }
+
         .menu-item {
             background: #ffe5b4;
             margin: 10px;
             padding: 10px;
             border-radius: 10px;
         }
+
         button {
-            background-color: white;
+            background: white;
             color: #d62828;
             border: none;
             padding: 10px;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
         }
-        footer {
-            background-color: #003049;
-            color: white;
-            text-align: center;
-            padding: 10px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-        }
+
         form {
             background: #ffe5b4;
             padding: 15px;
             border-radius: 10px;
             max-width: 300px;
-        }
-        #bookingForm {
             display: none;
-            margin-top: 20px;
+        }
+
+        footer {
+            background: #003049;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        table {
+            width: 100%;
+            background: white;
+            margin-top: 10px;
         }
     </style>
 </head>
+
 <body>
 
 <header>
@@ -77,99 +83,84 @@
     <a href="#">Home</a>
     <a href="#">Menu</a>
     <a href="#">Contact</a>
-    <a href="#" onclick="showAdmin()">Admin</a>
 </nav>
 
 <section>
-    <h2>Welcome</h2>
-    <p>Welcome to Spicy Bites! Enjoy the best food in town.</p>
+    <h2>Menu</h2>
+
+    <div class="menu-item">🍕 Pizza - ₹200</div>
+    <div class="menu-item">🍔 Burger - ₹150</div>
+    <div class="menu-item">🥤 Juice - ₹80</div>
 </section>
 
 <section>
-    <h2>Our Menu</h2>
-    <div class="menu-item">
-        <h3>🍕 Pizza</h3>
-        <p>Cheesy and tasty - ₹200</p>
-    </div>
-    <div class="menu-item">
-        <h3>🍔 Burger</h3>
-        <p>Juicy and spicy - ₹150</p>
-    </div>
-    <div class="menu-item">
-        <h3>🥤 Juice</h3>
-        <p>Fresh and healthy - ₹80</p>
-    </div>
-</section>
+    <h2>Book Table</h2>
 
-<section>
-    <h2>Contact Us</h2>
-    <p>📍 Chennai</p>
-    <p>📞 9066940210</p>
-    <!-- 🔥 Admin Button -->
-    <button onclick="showAdmin()">Admin View</button>
-</section>
-
-<!-- BOOK TABLE -->
-<section>
-    <h2>Book Your Table</h2>
-    <button onclick="showBookingForm()">Book Table</button>
+    <button onclick="toggleForm()">Book Table</button>
 
     <form id="bookingForm" onsubmit="saveBooking(event)">
-        <h3>Table Reservation</h3>
+        <h3>Reservation</h3>
 
-        <label>Name:</label>
-        <input type="text" id="name" required>
+        <input id="name" placeholder="Name" required><br>
+        <input id="phone" placeholder="Phone" required><br>
+        <input id="guests" type="number" placeholder="Guests" required><br>
+        <input id="date" type="date" required><br>
+        <input id="time" type="time" required><br>
 
-        <label>Phone:</label>
-        <input type="tel" id="phone" required>
-
-        <label>Guests:</label>
-        <input type="number" id="guests" required>
-
-        <label>Date:</label>
-        <input type="date" id="date" required>
-
-        <label>Time:</label>
-        <input type="time" id="time" required>
-
-        <label>Table Size:</label>
         <select id="table" required>
-            <option value="">Select</option>
+            <option value="">Table Size</option>
             <option>2</option>
             <option>4</option>
             <option>6</option>
-        </select>
+        </select><br><br>
 
-        <!-- ✅ QR PAYMENT -->
-        <h4>Scan & Pay</h4>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=yourupiid@okaxis&pn=SpicyBites&am=100&cu=INR">
-        <p>Scan using GPay / PhonePe / Paytm</p>
-
-        <button type="submit">Confirm Booking</button>
+        <button type="submit">Confirm</button>
     </form>
 </section>
 
+<section>
+    <h2>Contact</h2>
+    <p>📍 Chennai</p>
+    <p>📞 9066940210</p>
+
+    <button onclick="showAdmin()">Admin View</button>
+
+    <h3 id="count"></h3>
+
+    <div id="adminSection" style="display:none;">
+        <h3>Bookings</h3>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Guests</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Table</th>
+                </tr>
+            </thead>
+            <tbody id="adminTable"></tbody>
+        </table>
+    </div>
+</section>
+
 <footer>
-    <p>© 2026 Spicy Bites</p>
+    © 2026 Spicy Bites
 </footer>
 
 <script>
-function showBookingForm() {
-    var form = document.getElementById("bookingForm");
-    if (form.style.display === "block") {
-        form.style.display = "none";
-    } else {
-        form.style.display = "block";
-    }
+function toggleForm() {
+    let form = document.getElementById("bookingForm");
+    form.style.display = (form.style.display === "block") ? "none" : "block";
 }
 
 function saveBooking(e) {
     e.preventDefault();
 
-    // Save in localStorage (simple admin view)
     let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-    const newBooking = {
+    let newBooking = {
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
         guests: document.getElementById("guests").value,
@@ -181,111 +172,41 @@ function saveBooking(e) {
     bookings.push(newBooking);
     localStorage.setItem("bookings", JSON.stringify(bookings));
 
-    alert("Booking Saved Successfully!");
+    alert("Booking Saved!");
 
     document.getElementById("bookingForm").reset();
 }
-<script>
-function showBookingForm() {
-    const form = document.getElementById("bookingForm");
-    if(form.style.display === "none") {
-        form.style.display = "block";
-    } else {
-        form.style.display = "none";
-    }
-}
 
-/* 👇 இங்க Enter பண்ணி add பண்ணு */
 function showAdmin() {
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
     document.getElementById("adminSection").style.display = "block";
 
-    const table = document.getElementById("adminTable");
+    // count show
+    document.getElementById("count").innerText =
+        "Total Bookings: " + bookings.length;
+
+    let table = document.getElementById("adminTable");
     table.innerHTML = "";
 
-    firebase.database().ref("bookings").on("value", (snapshot) => {
-        const data = snapshot.val();
-        table.innerHTML = "";
+    if (bookings.length === 0) {
+        table.innerHTML = "<tr><td colspan='6'>No Bookings</td></tr>";
+        return;
+    }
 
-        for (let id in data) {
-            const b = data[id];
-
-            table.innerHTML += `
-            <tr>
-                <td>${b.name}</td>
-                <td>${b.phone}</td>
-                <td>${b.guests}</td>
-                <td>${b.date}</td>
-                <td>${b.time}</td>
-                <td>${b.table}</td>
-            </tr>`;
-        }
+    bookings.forEach(b => {
+        table.innerHTML += `
+        <tr>
+            <td>${b.name}</td>
+            <td>${b.phone}</td>
+            <td>${b.guests}</td>
+            <td>${b.date}</td>
+            <td>${b.time}</td>
+            <td>${b.table}</td>
+        </tr>`;
     });
 }
 </script>
-</script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-const firebaseConfig = {
-    apiKey: "AIzaSyDeF0DpuM8F-c8pn9WiMD_cLilvzHinKuk",
-    authDomain: "spicy-bytes.firebaseapp.com",
-    databaseURL: "https://spicy-bytes-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "spicy-bytes",
-    storageBucket: "spicy-bytes.firebasestorage.app",
-    messagingSenderId: "367050517228",
-    appId: "1:367050517228:web:554bd82ac44614fd6c93c9",
-    measurementId: "G-RPSQ3MG6VF"
-  };
-<section id="adminSection" style="display:none; padding:20px;">
-    <h2>📋 Booking Details (Admin)</h2>
-    <table border="1" width="100%" style="background:white;">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Guests</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Table</th>
-            </tr>
-        </thead>
-        <tbody id="adminTable"></tbody>
-    </table>
-</section>
+
 </body>
-</html><script>
-function showBookingForm() {
-    const form = document.getElementById("bookingForm");
-    if(form.style.display === "none") {
-        form.style.display = "block";
-    } else {
-        form.style.display = "none";
-    }
-}
-
-/* 👇 இங்க Enter பண்ணி add பண்ணு */
-function showAdmin() {
-    document.getElementById("adminSection").style.display = "block";
-
-    const table = document.getElementById("adminTable");
-    table.innerHTML = "";
-
-    firebase.database().ref("bookings").on("value", (snapshot) => {
-        const data = snapshot.val();
-        table.innerHTML = "";
-
-        for (let id in data) {
-            const b = data[id];
-
-            table.innerHTML += `
-            <tr>
-                <td>${b.name}</td>
-                <td>${b.phone}</td>
-                <td>${b.guests}</td>
-                <td>${b.date}</td>
-                <td>${b.time}</td>
-                <td>${b.table}</td>
-            </tr>`;
-        }
-    });
-}
-</script>
+</html>
