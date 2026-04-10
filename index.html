@@ -106,7 +106,8 @@
     <p>📞 9066940210</p>
 </section>
 
-<section id="bookTableSection">
+<!-- BOOK TABLE -->
+<section>
     <h2>Book Your Table</h2>
     <button onclick="showBookingForm()">Book Table</button>
 
@@ -119,8 +120,8 @@
         <label>Phone:</label>
         <input type="tel" id="phone" required>
 
-        <label>Number of Guests:</label>
-        <input type="number" id="guests" min="1" required>
+        <label>Guests:</label>
+        <input type="number" id="guests" required>
 
         <label>Date:</label>
         <input type="date" id="date" required>
@@ -130,48 +131,58 @@
 
         <label>Table Size:</label>
         <select id="table" required>
-            <option value="">Select Table Size</option>
-            <option value="2">2-seater</option>
-            <option value="4">4-seater</option>
-            <option value="6">6-seater</option>
+            <option value="">Select</option>
+            <option>2</option>
+            <option>4</option>
+            <option>6</option>
         </select>
 
-        <!-- QR CODE PAYMENT -->
+        <!-- ✅ QR PAYMENT -->
         <h4>Scan & Pay</h4>
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=yourupiid@okaxis&pn=SpicyBites&am=100&cu=INR">
         <p>Scan using GPay / PhonePe / Paytm</p>
-        <p style="color:green;">After payment, click Book Table</p>
 
-        <button type="submit">Book Table</button>
+        <button type="submit">Confirm Booking</button>
     </form>
 </section>
 
 <footer>
-    <p>© 2026 Spicy Bites Restaurant</p>
+    <p>© 2026 Spicy Bites</p>
 </footer>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
 <script>
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+function showBookingForm() {
+    var form = document.getElementById("bookingForm");
+    if (form.style.display === "block") {
+        form.style.display = "none";
+    } else {
+        form.style.display = "block";
+    }
+}
 
 function saveBooking(e) {
     e.preventDefault();
 
-    const booking = {
+    // Save in localStorage (simple admin view)
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+    const newBooking = {
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
-        guests: document.get
+        guests: document.getElementById("guests").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        table: document.getElementById("table").value
+    };
+
+    bookings.push(newBooking);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    alert("Booking Saved Successfully!");
+
+    document.getElementById("bookingForm").reset();
+}
+</script>
+
+</body>
+</html>
