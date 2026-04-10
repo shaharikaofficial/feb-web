@@ -61,7 +61,7 @@
             max-width: 300px;
         }
         #bookingForm {
-            display: none; /* hidden initially */
+            display: none;
             margin-top: 20px;
         }
     </style>
@@ -106,35 +106,38 @@
     <p>📞 9066940210</p>
 </section>
 
-<!-- Book Table Section -->
 <section id="bookTableSection">
     <h2>Book Your Table</h2>
     <button onclick="showBookingForm()">Book Table</button>
 
-    <form id="bookingForm" onsubmit="alert('Table Reserved Successfully!'); return false;">
+    <form id="bookingForm" onsubmit="saveBooking(event)">
         <h3>Table Reservation</h3>
+
         <label>Name:</label>
-        <input type="text" placeholder="Your Name" required>
+        <input type="text" id="name" required>
 
         <label>Phone:</label>
-        <input type="tel" placeholder="Phone Number" required>
+        <input type="tel" id="phone" required>
 
         <label>Number of Guests:</label>
-        <input type="number" placeholder="Guests" min="1" required>
+        <input type="number" id="guests" min="1" required>
 
         <label>Date:</label>
-        <input type="date" required>
+        <input type="date" id="date" required>
 
         <label>Time:</label>
-        <input type="time" required>
+        <input type="time" id="time" required>
 
         <label>Table Size:</label>
-        <select required>
+        <select id="table" required>
             <option value="">Select Table Size</option>
             <option value="2">2-seater</option>
             <option value="4">4-seater</option>
             <option value="6">6-seater</option>
         </select>
+
+        <!-- GPay Button -->
+        <button type="button" onclick="payNow()">Pay via GPay</button>
 
         <button type="submit">Book Table</button>
     </form>
@@ -144,15 +147,54 @@
     <p>© 2026 Spicy Bites Restaurant</p>
 </footer>
 
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
 <script>
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
+function saveBooking(e) {
+    e.preventDefault();
+
+    const booking = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        guests: document.getElementById("guests").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        table: document.getElementById("table").value
+    };
+
+    db.ref("bookings").push(booking);
+
+    alert("Table Reserved Successfully!");
+}
+
+function payNow() {
+    const upiID = "yourupiid@okaxis";
+    const name = "Spicy Bites";
+    const amount = "100";
+
+    const url = `upi://pay?pa=${upiID}&pn=${name}&am=${amount}&cu=INR`;
+
+    window.location.href = url;
+}
+
 function showBookingForm() {
     const form = document.getElementById("bookingForm");
-    if(form.style.display === "none") {
-        form.style.display = "block";
-        form.scrollIntoView({behavior: "smooth"});
-    } else {
-        form.style.display = "none";
-    }
+    form.style.display = form.style.display === "none" ? "block" : "none";
 }
 </script>
 
