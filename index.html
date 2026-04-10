@@ -17,7 +17,7 @@
             background: #fff;
         }
 
-        /* FULL SCREEN LOCK SCREEN */
+        /* LANDING SCREEN */
         #landing {
             height: 100vh;
             width: 100vw;
@@ -34,10 +34,6 @@
             font-size: 42px;
         }
 
-        #landing p {
-            margin: 10px 0 20px;
-        }
-
         #landing button {
             padding: 12px 25px;
             border: none;
@@ -47,9 +43,10 @@
             background: white;
             color: #ff416c;
             font-weight: bold;
+            margin-top: 15px;
         }
 
-        /* MAIN PAGE (hidden first) */
+        /* MAIN SITE */
         #main {
             display: none;
             padding: 15px;
@@ -81,6 +78,7 @@
             padding: 10px 15px;
             border-radius: 20px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         form {
@@ -114,29 +112,36 @@
             padding: 8px;
             text-align: center;
         }
+
+        .qr {
+            margin-top: 10px;
+            border: 3px solid #ff416c;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
 <body>
 
-<!-- LANDING SCREEN -->
+<!-- LANDING -->
 <div id="landing">
     <h1>🍽️ Spicy Bites</h1>
     <p>Delicious Food • Fresh Taste</p>
     <button onclick="enterSite()">Enter</button>
 </div>
 
-<!-- MAIN SITE -->
+<!-- MAIN -->
 <div id="main">
 
 <header>
-    <h2>🍽️ Spicy Bites Menu</h2>
+    <h2>🍽️ Spicy Bites</h2>
 </header>
 
 <div class="menu">
     <div class="item">🍕 Pizza - ₹200</div>
     <div class="item">🍔 Burger - ₹150</div>
     <div class="item">🥤 Juice - ₹80</div>
+    <div class="item">🍝 Pasta - ₹180</div>
 </div>
 
 <button onclick="toggleForm()">Book Table</button>
@@ -155,7 +160,13 @@
         <option>6</option>
     </select>
 
-    <button type="submit">Confirm</button>
+    <h3>💳 Scan & Pay (GPay)</h3>
+
+    <!-- FIXED QR CODE -->
+    <img class="qr"
+    src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi%3A%2F%2Fpay%3Fpa%3Dyourupiid%40okaxis%26pn%3DSpicyBites%26am%3D100%26cu%3DINR">
+
+    <button type="submit">Confirm Booking</button>
 </form>
 
 <button onclick="showAdmin()">Admin View</button>
@@ -195,18 +206,18 @@ function saveBooking(e) {
     let data = JSON.parse(localStorage.getItem("bookings")) || [];
 
     data.push({
-        name: name.value,
-        phone: phone.value,
-        guests: guests.value,
-        date: date.value,
-        time: time.value,
-        table: table.value
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        guests: document.getElementById("guests").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        table: document.getElementById("table").value
     });
 
     localStorage.setItem("bookings", JSON.stringify(data));
 
-    alert("Booked Successfully!");
-    form.reset();
+    alert("Booking Confirmed!");
+    document.getElementById("form").reset();
 }
 
 function showAdmin() {
