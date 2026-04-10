@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Spicy Bites Restaurant</title>
+
     <style>
         body {
             font-family: Arial;
@@ -24,7 +25,7 @@
 
         nav a {
             color: white;
-            margin: 15px;
+            margin: 10px;
             text-decoration: none;
             font-weight: bold;
         }
@@ -35,8 +36,8 @@
 
         .menu-item {
             background: #ffe5b4;
-            margin: 10px;
             padding: 10px;
+            margin: 10px 0;
             border-radius: 10px;
         }
 
@@ -47,6 +48,7 @@
             padding: 10px;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
         }
 
         form {
@@ -57,17 +59,23 @@
             display: none;
         }
 
-        footer {
-            background: #003049;
-            color: white;
-            text-align: center;
-            padding: 10px;
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
         }
 
         table {
             width: 100%;
             background: white;
             margin-top: 10px;
+        }
+
+        footer {
+            background: #003049;
+            color: white;
+            text-align: center;
+            padding: 10px;
         }
     </style>
 </head>
@@ -101,20 +109,26 @@
     <form id="bookingForm" onsubmit="saveBooking(event)">
         <h3>Reservation</h3>
 
-        <input id="name" placeholder="Name" required><br>
-        <input id="phone" placeholder="Phone" required><br>
-        <input id="guests" type="number" placeholder="Guests" required><br>
-        <input id="date" type="date" required><br>
-        <input id="time" type="time" required><br>
+        <input id="name" placeholder="Name" required>
+        <input id="phone" placeholder="Phone" required>
+        <input id="guests" type="number" placeholder="Guests" required>
+        <input id="date" type="date" required>
+        <input id="time" type="time" required>
 
         <select id="table" required>
             <option value="">Table Size</option>
             <option>2</option>
             <option>4</option>
             <option>6</option>
-        </select><br><br>
+        </select>
 
-        <button type="submit">Confirm</button>
+        <!-- 💳 QR CODE (GPay) -->
+        <h4>💳 Scan & Pay using GPay</h4>
+        <img 
+            src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=yourupiid@okaxis&pn=SpicyBites&am=100&cu=INR"
+            style="border:2px solid #d62828; border-radius:10px;">
+
+        <button type="submit">Confirm Booking</button>
     </form>
 </section>
 
@@ -128,7 +142,6 @@
     <h3 id="count"></h3>
 
     <div id="adminSection" style="display:none;">
-        <h3>Bookings</h3>
         <table border="1">
             <thead>
                 <tr>
@@ -172,8 +185,7 @@ function saveBooking(e) {
     bookings.push(newBooking);
     localStorage.setItem("bookings", JSON.stringify(bookings));
 
-    alert("Booking Saved!");
-
+    alert("Booking Saved Successfully!");
     document.getElementById("bookingForm").reset();
 }
 
@@ -182,7 +194,6 @@ function showAdmin() {
 
     document.getElementById("adminSection").style.display = "block";
 
-    // count show
     document.getElementById("count").innerText =
         "Total Bookings: " + bookings.length;
 
@@ -190,7 +201,7 @@ function showAdmin() {
     table.innerHTML = "";
 
     if (bookings.length === 0) {
-        table.innerHTML = "<tr><td colspan='6'>No Bookings</td></tr>";
+        table.innerHTML = "<tr><td colspan='6'>No Bookings Found</td></tr>";
         return;
     }
 
