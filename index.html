@@ -1,114 +1,169 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Spicy Bites Restaurant</title>
+    <title>Spicy Bites 🍽️</title>
 
     <style>
         body {
-            font-family: Arial;
             margin: 0;
-            background-color: #fff8f0;
+            font-family: 'Arial';
+            background: linear-gradient(135deg, #fff8f0, #ffe0b2);
         }
 
         header {
-            background: #d62828;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         nav {
-            background: #f77f00;
-            padding: 10px;
-            text-align: center;
+            background: #ff9800;
+            display: flex;
+            justify-content: center;
+            padding: 12px;
         }
 
         nav a {
             color: white;
-            margin: 10px;
+            margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: black;
         }
 
         section {
-            padding: 20px;
+            padding: 25px;
+        }
+
+        h2 {
+            color: #d62828;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
         }
 
         .menu-item {
-            background: #ffe5b4;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+            background: #fff3e0;
         }
 
         button {
-            background: white;
-            color: #d62828;
+            background: linear-gradient(90deg, #ff512f, #dd2476);
+            color: white;
             border: none;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 10px 15px;
+            border-radius: 25px;
             cursor: pointer;
             margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
         }
 
         form {
-            background: #ffe5b4;
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 320px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             display: none;
         }
 
         input, select {
             width: 100%;
-            padding: 8px;
-            margin: 5px 0;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 8px;
+            border: 1px solid #ddd;
         }
 
         table {
             width: 100%;
             background: white;
-            margin-top: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: #ff416c;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
         }
 
         footer {
-            background: #003049;
+            background: #222;
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 15px;
+            margin-top: 20px;
         }
+
+        .qr {
+            margin-top: 10px;
+            border: 3px solid #ff416c;
+            border-radius: 10px;
+        }
+
     </style>
 </head>
 
 <body>
 
 <header>
-    <h1>🍴 Spicy Bites</h1>
-    <p>Delicious Food, Happy Mood!</p>
+    <h1>🍽️ Spicy Bites</h1>
+    <p>Delicious Food • Happy Mood • Fresh Taste</p>
 </header>
 
 <nav>
     <a href="#">Home</a>
     <a href="#">Menu</a>
+    <a href="#">Book</a>
     <a href="#">Contact</a>
 </nav>
 
 <section>
-    <h2>Menu</h2>
+    <h2>🔥 Our Menu</h2>
 
-    <div class="menu-item">🍕 Pizza - ₹200</div>
-    <div class="menu-item">🍔 Burger - ₹150</div>
-    <div class="menu-item">🥤 Juice - ₹80</div>
+    <div class="menu">
+        <div class="menu-item">🍕 Pizza<br>₹200</div>
+        <div class="menu-item">🍔 Burger<br>₹150</div>
+        <div class="menu-item">🥤 Juice<br>₹80</div>
+        <div class="menu-item">🍝 Pasta<br>₹180</div>
+    </div>
 </section>
 
 <section>
-    <h2>Book Table</h2>
+    <h2>📅 Book Table</h2>
 
-    <button onclick="toggleForm()">Book Table</button>
+    <button onclick="toggleForm()">Open Booking</button>
 
     <form id="bookingForm" onsubmit="saveBooking(event)">
-        <h3>Reservation</h3>
-
         <input id="name" placeholder="Name" required>
         <input id="phone" placeholder="Phone" required>
         <input id="guests" type="number" placeholder="Guests" required>
@@ -122,27 +177,24 @@
             <option>6</option>
         </select>
 
-        <!-- 💳 QR CODE (GPay) -->
-        <h4>💳 Scan & Pay using GPay</h4>
-        <img 
-            src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=yourupiid@okaxis&pn=SpicyBites&am=100&cu=INR"
-            style="border:2px solid #d62828; border-radius:10px;">
+        <h3>💳 Scan & Pay</h3>
+
+        <img class="qr"
+        src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=yourupiid@okaxis&pn=SpicyBites&am=100&cu=INR">
 
         <button type="submit">Confirm Booking</button>
     </form>
 </section>
 
 <section>
-    <h2>Contact</h2>
-    <p>📍 Chennai</p>
-    <p>📞 9066940210</p>
+    <h2>📊 Admin Panel</h2>
 
     <button onclick="showAdmin()">Admin View</button>
 
     <h3 id="count"></h3>
 
     <div id="adminSection" style="display:none;">
-        <table border="1">
+        <table>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -159,7 +211,7 @@
 </section>
 
 <footer>
-    © 2026 Spicy Bites
+    © 2026 Spicy Bites | Made with ❤️
 </footer>
 
 <script>
@@ -173,20 +225,19 @@ function saveBooking(e) {
 
     let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-    let newBooking = {
-        name: document.getElementById("name").value,
-        phone: document.getElementById("phone").value,
-        guests: document.getElementById("guests").value,
-        date: document.getElementById("date").value,
-        time: document.getElementById("time").value,
-        table: document.getElementById("table").value
-    };
+    bookings.push({
+        name: name.value,
+        phone: phone.value,
+        guests: guests.value,
+        date: date.value,
+        time: time.value,
+        table: table.value
+    });
 
-    bookings.push(newBooking);
     localStorage.setItem("bookings", JSON.stringify(bookings));
 
-    alert("Booking Saved Successfully!");
-    document.getElementById("bookingForm").reset();
+    alert("Booking Confirmed!");
+    bookingForm.reset();
 }
 
 function showAdmin() {
@@ -199,11 +250,6 @@ function showAdmin() {
 
     let table = document.getElementById("adminTable");
     table.innerHTML = "";
-
-    if (bookings.length === 0) {
-        table.innerHTML = "<tr><td colspan='6'>No Bookings Found</td></tr>";
-        return;
-    }
 
     bookings.forEach(b => {
         table.innerHTML += `
