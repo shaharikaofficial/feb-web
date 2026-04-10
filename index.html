@@ -3,11 +3,53 @@
 <head>
     <title>Spicy Bites 🍽️</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
-        body {
+        html, body {
             margin: 0;
-            font-family: 'Arial';
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial;
+        }
+
+        body {
             background: linear-gradient(135deg, #fff8f0, #ffe0b2);
+            display: flex;
+            justify-content: center;
+        }
+
+        /* LANDING PAGE */
+        #landing {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+            color: white;
+            text-align: center;
+        }
+
+        #landing h1 {
+            font-size: 40px;
+        }
+
+        #landing button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* MAIN SITE */
+        #mainSite {
+            width: 100%;
+            max-width: 1200px;
+            display: none;
         }
 
         header {
@@ -30,7 +72,6 @@
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.3s;
         }
 
         nav a:hover {
@@ -57,11 +98,11 @@
             border-radius: 15px;
             box-shadow: 0 5px 10px rgba(0,0,0,0.1);
             text-align: center;
-            transition: 0.3s;
         }
 
         .menu-item:hover {
             transform: scale(1.05);
+            transition: 0.3s;
             background: #fff3e0;
         }
 
@@ -72,12 +113,6 @@
             padding: 10px 15px;
             border-radius: 25px;
             cursor: pointer;
-            margin-top: 10px;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            transform: scale(1.05);
         }
 
         form {
@@ -129,11 +164,20 @@
             border: 3px solid #ff416c;
             border-radius: 10px;
         }
-
     </style>
 </head>
 
 <body>
+
+<!-- LANDING PAGE -->
+<div id="landing">
+    <h1>🍽️ Spicy Bites</h1>
+    <p>Delicious Food • Happy Mood • Fresh Taste</p>
+    <button onclick="enterSite()">Enter Restaurant</button>
+</div>
+
+<!-- MAIN WEBSITE -->
+<div id="mainSite">
 
 <header>
     <h1>🍽️ Spicy Bites</h1>
@@ -214,7 +258,14 @@
     © 2026 Spicy Bites | Made with ❤️
 </footer>
 
+</div>
+
 <script>
+function enterSite() {
+    document.getElementById("landing").style.display = "none";
+    document.getElementById("mainSite").style.display = "block";
+}
+
 function toggleForm() {
     let form = document.getElementById("bookingForm");
     form.style.display = (form.style.display === "block") ? "none" : "block";
@@ -226,18 +277,18 @@ function saveBooking(e) {
     let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
     bookings.push({
-        name: name.value,
-        phone: phone.value,
-        guests: guests.value,
-        date: date.value,
-        time: time.value,
-        table: table.value
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        guests: document.getElementById("guests").value,
+        date: document.getElementById("date").value,
+        time: document.getElementById("time").value,
+        table: document.getElementById("table").value
     });
 
     localStorage.setItem("bookings", JSON.stringify(bookings));
 
     alert("Booking Confirmed!");
-    bookingForm.reset();
+    document.getElementById("bookingForm").reset();
 }
 
 function showAdmin() {
