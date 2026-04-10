@@ -136,8 +136,11 @@
             <option value="6">6-seater</option>
         </select>
 
-        <!-- GPay Button -->
-        <button type="button" onclick="payNow()">Pay via GPay</button>
+        <!-- QR CODE PAYMENT -->
+        <h4>Scan & Pay</h4>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=yourupiid@okaxis&pn=SpicyBites&am=100&cu=INR">
+        <p>Scan using GPay / PhonePe / Paytm</p>
+        <p style="color:green;">After payment, click Book Table</p>
 
         <button type="submit">Book Table</button>
     </form>
@@ -171,32 +174,4 @@ function saveBooking(e) {
     const booking = {
         name: document.getElementById("name").value,
         phone: document.getElementById("phone").value,
-        guests: document.getElementById("guests").value,
-        date: document.getElementById("date").value,
-        time: document.getElementById("time").value,
-        table: document.getElementById("table").value
-    };
-
-    db.ref("bookings").push(booking);
-
-    alert("Table Reserved Successfully!");
-}
-
-function payNow() {
-    const upiID = "yourupiid@okaxis";
-    const name = "Spicy Bites";
-    const amount = "100";
-
-    const url = `upi://pay?pa=${upiID}&pn=${name}&am=${amount}&cu=INR`;
-
-    window.location.href = url;
-}
-
-function showBookingForm() {
-    const form = document.getElementById("bookingForm");
-    form.style.display = form.style.display === "none" ? "block" : "none";
-}
-</script>
-
-</body>
-</html>
+        guests: document.get
